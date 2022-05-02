@@ -61,6 +61,11 @@ class SettingsViewController: UIViewController {
         setColorViewBackGroundColor()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
     //MARK: IB Actions
     @IBAction func pickValueOfRed() {
         labelOfRedValue.text = String(round(redSlider.value * 100) / 100)
@@ -153,11 +158,6 @@ extension SettingsViewController: UITextFieldDelegate {
         default:
             break
         }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        view.endEditing(true)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
