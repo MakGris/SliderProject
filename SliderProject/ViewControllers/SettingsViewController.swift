@@ -121,6 +121,12 @@ extension SettingsViewController {
         
         colorView.layer.cornerRadius = 10
     }
+    private func showAlert() {
+    let alertVC = UIAlertController(title: "Error", message: "You must enter value from 0 to 1", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .cancel)
+        alertVC.addAction(okAction)
+        present(alertVC, animated: true)
+    }
 }
 
 //MARK: Keyboard and TextField Methods
@@ -130,6 +136,7 @@ extension SettingsViewController: UITextFieldDelegate {
         guard let value = textField.text else { return }
         guard let floatValue = Float(value) else { return }
         self.activeTextField = nil
+        
         switch textField {
         case redTextField:
             if floatValue <= 1 {
@@ -137,6 +144,7 @@ extension SettingsViewController: UITextFieldDelegate {
                 redSlider.value = floatValue
                 setColorViewBackGroundColor()
             } else {
+                showAlert()
                 redTextField.text = labelOfRedValue.text
             }
         case greenTextField:
@@ -145,6 +153,7 @@ extension SettingsViewController: UITextFieldDelegate {
                 greenSlider.value = floatValue
                 setColorViewBackGroundColor()
             } else {
+                showAlert()
                 greenTextField.text = labelOfGreenValue.text
             }
         case blueTextField:
@@ -153,6 +162,7 @@ extension SettingsViewController: UITextFieldDelegate {
                 blueSlider.value = floatValue
                 setColorViewBackGroundColor()
             } else {
+                showAlert()
                 blueTextField.text = labelOfBlueValue.text
             }
         default:
